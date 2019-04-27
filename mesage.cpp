@@ -136,7 +136,7 @@ void Mesage::parse_page_type(char BH,char BL)  {
     pp += BL;
     switch (pp) {
         case AP:
-            sprintf(buffer,"%s s ID: %d sa %d swapla.",msg_page_type[0].c_str(),
+            sprintf(buffer,"%s s ID: %d sa  swapla.",msg_page_type[0].c_str(),
                 convert_param(new_line[body_start+2],new_line[body_start+3]),
                 new_line[body_start+5]);
             s_body = buffer;
