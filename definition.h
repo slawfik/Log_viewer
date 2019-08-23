@@ -3,11 +3,13 @@
 #include <string>
 
 #define MAX_COUNT_LOG_MESSAGE 500
+#define LEN_LOG_BODY 8
+#define LEN_LOG_DATE 8
 
-enum stlpce { NULA = 0, JEDEN=1, DVA = 2, TRI = 3 };
+enum stlpce { NULA = 0, JEDEN=1, DVA = 2, TRI = 3 , STYRI = 4};
 
-const std::string msg_type_high[2] = { "Systém", "Vlákno" };
-const std::string msg_type_low[2] = {"Špeciálne", "Použivateľské" };
+const std::string msg_type_high[2] = { "System", "Vlakno" };
+const std::string msg_type_low[2] = {"Specialne", "Pouzivatelske" };
 const std::string msg_type_medium[3] = {"Zariadenie", "UI stránka", "Tlačidlo"};
 
 enum msg_proirity { P_HIGH = 32, P_MEDIUM = 64, P_LOW = 128 };
@@ -16,7 +18,7 @@ const std::string msg_system_type[1] = { "Systém repot" };
 const std::string msg_thread_type[2] = { "Proto vlákno", "Time line" };
 //prior MEDIUM
 const std::string msg_button_type[1] = { "Stlačené tlačidlo" };
-const std::string msg_page_type[3] = { "Hlavná stránka", "Popup stranka", "Správa" };
+const std::string msg_page_type[3] = { "Hlavná stránka", "Popup stránka", "Správa" };
 const std::string msg_dev_type[] = { "AMX", "Cisco 1", "Cisco 2", "Matica 1", "Matica 2", "PC stream", "PC prezent", "Projektor 1", "Projektor 2",
 "PDU", "AUDIO", "SMTP", "TV vsetky", "TV 1", "TV 2", "TV 3", "TV 4", "Monitor vsetky", "Monitor 1", "Monitor 2" , "Platno 1", "Platno 2"};// TODO
 #define MSG_DEV_TYPE_COUNT 22

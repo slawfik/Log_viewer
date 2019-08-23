@@ -11,7 +11,7 @@ My_T_model::My_T_model(QObject *parent)
 
 int My_T_model::rowCount(const QModelIndex & /*parent*/) const
 {
-   return inst_of_parser.getMessage_count();
+   return static_cast<int>(inst_of_parser.arr->size());
 }
 
 int My_T_model::columnCount(const QModelIndex & /*parent*/) const
@@ -24,13 +24,13 @@ QVariant My_T_model::headerData(int section, Qt::Orientation orientation, int ro
     if (role == Qt::DisplayRole && orientation == Qt::Horizontal) {
         switch (section) {
         case 0:
-            return QString("Čas");
+            return QString("Cas");
         case 1:
             return QString("Priorita");
         case 2:
-            return QString("Autor správy");
+            return QString("Autor spravy");
         case 3:
-            return QString(" Telo správy ");
+            return QString(" Telo spravy ");
         }
     }
     return QVariant();
@@ -39,17 +39,17 @@ QVariant My_T_model::headerData(int section, Qt::Orientation orientation, int ro
 QVariant My_T_model::data(const QModelIndex &index, int role) const
 {
 
-    int row = index.row();
-    int col = index.column();
+    unsigned int row = static_cast<unsigned int>(index.row());
+    unsigned int col =static_cast<unsigned int>(index.column());
     // generate a log message when this method gets called
     //qDebug() << QString("row %1, col%2, role %3").arg(row).arg(col).arg(role);
 
     switch (role) {
         case Qt::DisplayRole:
-            if (col == 0) return QString(QString::fromStdString(inst_of_parser._message[row]->getS_time()));
-            else if (col == 1) return QString(QString::fromStdString(inst_of_parser._message[row]->getS_flag()));
-            else if (col == 2) return QString(QString::fromStdString(inst_of_parser._message[row]->getS_priority()));
-            else if (col == 3) return QString(QString::fromStdString(inst_of_parser._message[row]->getS_body()));
+            if (col == 0) return QString(QString::fromStdString(inst_of_parser.arr->operator[](row)->getS_time()));
+            else if (col == 1) return QString(QString::fromStdString(inst_of_parser.arr->operator[](row)->getS_flag()));
+            else if (col == 2) return QString(QString::fromStdString(inst_of_parser.arr->operator[](row)->getS_priority()));
+            else if (col == 3) return QString(QString::fromStdString(inst_of_parser.arr->operator[](row)->getS_body()));
             else               return QString("");
 
         case Qt::FontRole:
@@ -60,7 +60,9 @@ QVariant My_T_model::data(const QModelIndex &index, int role) const
             }*/
             break;
         case Qt::BackgroundRole:
-            switch (inst_of_parser._message[row]->getPriority()) {
+            switch (inst_of_parser.arr->operator[](row)->getPriority()) {
+                case 1:
+                    return QBrush(Qt::green);
                 case 2:
                     return QBrush(Qt::yellow);
                 case 3:
@@ -78,3 +80,4 @@ QVariant My_T_model::data(const QModelIndex &index, int role) const
     }
     return QVariant();
 }
+

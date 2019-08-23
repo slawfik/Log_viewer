@@ -3,23 +3,35 @@
 
 #include <fstream>
 #include <stdio.h>
+#include <vector>
 #include "mesage.h"
 
 class parser_inst
 {
-private:
-   string filename;
-   string new_line;
-   ifstream read;
-   int aloc_instance;
-   int message_count;
+    private:
+       string filename;
+       string new_line;
+       ifstream read;
+       int message_count;
 
-public:
-   Mesage* _message[MAX_COUNT_LOG_MESSAGE];
+    public:
+        vector<Mesage *> * arr;
+        parser_inst();
+        int getMessage_count() const {return message_count;}
+        void pars_message(string pa_filename);
+        inline virtual ~parser_inst()
+        {
+            /*for (std::vector<Mesage *>::iterator it = arr->begin() ; it != arr->end(); ++it)
+                it.operator*()->getS_body();*/
+            if(this->arr != nullptr){
+                for(size_t i =0;i<this->arr->size();i++){
+                    delete this->arr->operator[](i);
+                }
+                this->arr->clear();
+            }
 
-    parser_inst();
-    int getMessage_count() const {return message_count;}
-    void pars_message(string pa_filename);
+        }
+
 };
 
 //extern parser_inst parser_base_inst;
