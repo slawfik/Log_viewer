@@ -174,7 +174,7 @@ void Mesage::parse_thread_type(char BH,char BL) {
         s_body = buffer;
     } else if(pp == TM) {
         sprintf(buffer,"%s.",msg_thread_type[1].c_str());
-        
+        s_body = buffer;
     } else {
         s_body = "NEZNAÅME";
     }
